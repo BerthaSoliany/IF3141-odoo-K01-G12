@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_pelanggan,pipinos.pelanggan,model_pipinos_pelanggan,,1,1,1,1
+access_transaksi,pipinos.transaksi,model_pipinos_transaksi,,1,1,1,1
+access_detail,pipinos.detail.transaksi,model_pipinos_detail_transaksi,,1,1,1,1
+access_menu,pipinos.item.menu,model_pipinos_item_menu,,1,1,1,1
+access_demografi,pipinos.demografi,model_pipinos_demografi,,1,1,1,1
+access_loyalty,pipinos.loyalty.member,model_pipinos_loyalty_member,,1,1,1,1
+access_staff,pipinos.staff,model_pipinos_staff,,1,1,1,1
+access_log,pipinos.log.akses,model_pipinos_log_akses,,1,1,1,1
+access_segmen,pipinos.segmen,model_pipinos_segmen,,1,1,1,1
+access_kampanye,pipinos.kampanye,model_pipinos_kampanye,,1,1,1,1

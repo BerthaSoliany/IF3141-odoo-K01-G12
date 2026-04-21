@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_pipinos_pelanggan" model="ir.actions.act_window">
+        <field name="name">Master Data Pelanggan</field>
+        <field name="res_model">pipinos.pelanggan</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="view_pelanggan_form" model="ir.ui.view">
+        <field name="name">pipinos.pelanggan.form</field>
+        <field name="model">pipinos.pelanggan</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="id_pelanggan" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <field name="nama_depan"/>
+                        <field name="nama_belakang"/>
+                        <field name="no_hp"/>
+                    </group>
+                    
+                    <notebook>
+                        <page string="Data Demografi">
+                            <group>
+                                <field name="usia_input"/>
+                                <field name="gender_input"/>
+                            </group>
+                        </page>
+                        <page string="Status Loyalty">
+                            <group>
+                                <field name="total_poin_input"/>
+                                <field name="status_level_output" widget="badge" decoration-warning="status_level_output=='gold'" decoration-info="status_level_output=='silver'"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- search biar bisa pk nama pelanggan -->
+    <record id="view_pelanggan_search" model="ir.ui.view">
+        <field name="name">pipinos.pelanggan.search</field>
+        <field name="model">pipinos.pelanggan</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="nama_lengkap" string="Pencarian Nama" filter_domain="['|', '|', ('nama_lengkap', 'ilike', self), ('nama_depan', 'ilike', self), ('nama_belakang', 'ilike', self)]"/>
+                <field name="id_pelanggan" string="Cari ID Pelanggan"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_pipinos_loyalty" model="ir.actions.act_window">
+        <field name="name">Sistem Loyalty (Kasir)</field>
+        <field name="res_model">pipinos.loyalty.member</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="view_loyalty_tree" model="ir.ui.view">
+        <field name="name">pipinos.loyalty.member.tree</field>
+        <field name="model">pipinos.loyalty.member</field>
+        <field name="arch" type="xml">
+            <tree string="Daftar Member Loyalty">
+                <field name="id_pelanggan" string="Nama Pelanggan"/>
+                <field name="id_loyalty" string="ID Loyalty"/>
+                <field name="total_poin"/>
+                <field name="status_level" widget="badge" decoration-warning="status_level=='gold'" decoration-info="status_level=='silver'"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_loyalty_form" model="ir.ui.view">
+        <field name="name">pipinos.loyalty.member.form</field>
+        <field name="model">pipinos.loyalty.member</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="id_pelanggan" class="oe_edit_only" string="Nama Pelanggan"/>
+                        <h1><field name="id_pelanggan" options="{'no_quick_create': True}"/></h1>
+                    </div>
+                    <group string="Evaluasi Status &amp; Reward">
+                        <field name="id_loyalty" readonly="1"/>
+                        <field name="total_poin"/>
+                        <field name="status_level" widget="badge" decoration-warning="status_level=='gold'" decoration-info="status_level=='silver'"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- search biar bisa pk nama pelanggan -->
+    <record id="view_loyalty_search" model="ir.ui.view">
+        <field name="name">pipinos.loyalty.member.search</field>
+        <field name="model">pipinos.loyalty.member</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="id_pelanggan" string="Cari Nama Pelanggan" filter_domain="['|', '|', ('id_pelanggan.nama_lengkap', 'ilike', self), ('id_pelanggan.nama_depan', 'ilike', self), ('id_pelanggan.nama_belakang', 'ilike', self)]"/>
+                <field name="id_loyalty" string="Cari ID Loyalty"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_pipinos_dashboard" model="ir.actions.act_window">
+        <field name="name">Dashboard Analitik</field>
+        <field name="res_model">pipinos.demografi</field>
+        <field name="view_mode">graph,pivot</field>
+    </record>
+
+    <record id="view_demografi_graph" model="ir.ui.view">
+        <field name="name">pipinos.demografi.graph</field>
+        <field name="model">pipinos.demografi</field>
+        <field name="arch" type="xml">
+            <graph string="Analitik Demografi Pengunjung" type="bar">
+                <field name="gender"/>
+                <field name="usia" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="action_pipinos_menu" model="ir.actions.act_window">
+        <field name="name">Master Data Menu</field>
+        <field name="res_model">pipinos.item.menu</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="view_menu_form" model="ir.ui.view">
+        <field name="name">pipinos.item.menu.form</field>
+        <field name="model">pipinos.item.menu</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title"><h1><field name="id_menu" readonly="1"/></h1></div>
+                    <group>
+                        <field name="nama_menu"/>
+                        <field name="kategori"/>
+                        <field name="harga"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_pipinos_kampanye" model="ir.actions.act_window">
+        <field name="name">Master Data Kampanye</field>
+        <field name="res_model">pipinos.kampanye</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="view_kampanye_form" model="ir.ui.view">
+        <field name="name">pipinos.kampanye.form</field>
+        <field name="model">pipinos.kampanye</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title"><h1><field name="id_kampanye" readonly="1"/></h1></div>
+                    <group>
+                        <field name="nama_kampanye"/>
+                        <field name="tgl_mulai"/>
+                        <field name="tgl_selesai"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_pipinos_staff" model="ir.actions.act_window">
+        <field name="name">Master Data Staff</field>
+        <field name="res_model">pipinos.staff</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="view_staff_form" model="ir.ui.view">
+        <field name="name">pipinos.staff.form</field>
+        <field name="model">pipinos.staff</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title"><h1><field name="id_staff" readonly="1"/></h1></div>
+                    <group>
+                        <field name="nama_staff"/>
+                        <field name="role"/>
+                        <field name="username"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_pipinos_segmen" model="ir.actions.act_window">
+        <field name="name">Segmen Pelanggan</field>
+        <field name="res_model">pipinos.segmen</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="view_segmen_form" model="ir.ui.view">
+        <field name="name">pipinos.segmen.form</field>
+        <field name="model">pipinos.segmen</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title"><h1><field name="id_segmen" readonly="1"/></h1></div>
+                    <group>
+                        <field name="nama_segmen"/>
+                        <field name="kriteria"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_pipinos_transaksi" model="ir.actions.act_window">
+        <field name="name">Data Transaksi</field>
+        <field name="res_model">pipinos.transaksi</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="view_transaksi_form" model="ir.ui.view">
+        <field name="name">pipinos.transaksi.form</field>
+        <field name="model">pipinos.transaksi</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title"><h1><field name="id_transaksi" readonly="1"/></h1></div>
+                    <group>
+                        <group>
+                            <field name="id_pelanggan" options="{'no_quick_create': True}" filter_domain="['|', '|', ('nama_lengkap', 'ilike', self), ('nama_depan', 'ilike', self), ('nama_belakang', 'ilike', self)]"/>
+                            <field name="tanggal"/>
+                        </group>
+                        <group>
+                            <field name="total_nominal"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Rincian Menu (D-03)">
+                            <field name="detail_ids">
+                                <tree editable="bottom">
+                                    <field name="id_detail" readonly="1"/>
+                                    <field name="id_menu"/>
+                                    <field name="qty"/>
+                                    <field name="subtotal"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_pipinos_log" model="ir.actions.act_window">
+        <field name="name">Log Akses Staff</field>
+        <field name="res_model">pipinos.log.akses</field>
+        <field name="view_mode">tree</field>
+    </record>
+    <record id="view_log_tree" model="ir.ui.view">
+        <field name="name">pipinos.log.akses.tree</field>
+        <field name="model">pipinos.log.akses</field>
+        <field name="arch" type="xml">
+            <tree create="false" edit="false" delete="false">
+                <field name="id_log"/>
+                <field name="id_staff"/>
+                <field name="timestamp"/>
+                <field name="aksi"/>
+            </tree>
+        </field>
+    </record>
+
+    <menuitem id="menu_pipinos_root" name="PIPINOS App" sequence="10"/>
+    
+    <menuitem id="menu_admin_root" name="Admin (Manajemen)" parent="menu_pipinos_root" sequence="1"/>
+    
+    <menuitem id="menu_admin_master" name="Master Data" parent="menu_admin_root" sequence="1"/>
+    <menuitem id="menu_admin_pelanggan" name="Data Pelanggan" parent="menu_admin_master" action="action_pipinos_pelanggan" sequence="1"/>
+    <menuitem id="menu_admin_menu" name="Item Menu" parent="menu_admin_master" action="action_pipinos_menu" sequence="2"/>
+    <menuitem id="menu_admin_kampanye" name="Kampanye Promo" parent="menu_admin_master" action="action_pipinos_kampanye" sequence="3"/>
+    <menuitem id="menu_admin_staff" name="Data Staff" parent="menu_admin_master" action="action_pipinos_staff" sequence="4"/>
+    <menuitem id="menu_admin_segmen" name="Segmen Pelanggan" parent="menu_admin_master" action="action_pipinos_segmen" sequence="5"/>
+    
+    <menuitem id="menu_admin_transaksi" name="Riwayat Transaksi" parent="menu_admin_root" action="action_pipinos_transaksi" sequence="2"/>
+    <menuitem id="menu_admin_log" name="Log Akses Staff" parent="menu_admin_root" action="action_pipinos_log" sequence="3"/>
+    <menuitem id="menu_admin_dashboard" name="Dashboard Analitik" parent="menu_admin_root" action="action_pipinos_dashboard" sequence="4"/>
+    
+    <menuitem id="menu_kasir_root" name="Kasir (Operasional)" parent="menu_pipinos_root" sequence="2"/>
+    <menuitem id="menu_kasir_transaksi" name="Transaksi Baru" parent="menu_kasir_root" action="action_pipinos_transaksi" sequence="1"/>
+    <menuitem id="menu_kasir_loyalty" name="Sistem Loyalty" parent="menu_kasir_root" action="action_pipinos_loyalty" sequence="2"/>
+</odoo>

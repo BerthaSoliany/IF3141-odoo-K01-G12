@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Pelanggan -->
+        <record id="seq_pipinos_pelanggan" model="ir.sequence">
+            <field name="name">Sequence Pelanggan</field>
+            <field name="code">pipinos.pelanggan</field>
+            <field name="prefix">CUST-</field>
+            <field name="padding">4</field>
+        </record>
+
+        <!--Transaksi -->
+        <record id="seq_pipinos_transaksi" model="ir.sequence">
+            <field name="name">Sequence Transaksi</field>
+            <field name="code">pipinos.transaksi</field>
+            <field name="prefix">TRX-</field>
+            <field name="padding">4</field>
+        </record>
+
+        <!-- Detail Transaksi -->
+        <record id="seq_pipinos_detail_transaksi" model="ir.sequence">
+            <field name="name">Sequence Detail Transaksi</field>
+            <field name="code">pipinos.detail.transaksi</field>
+            <field name="prefix">DTL-</field>
+            <field name="padding">4</field>
+        </record>
+
+        <!-- Item Menu -->
+        <record id="seq_pipinos_item_menu" model="ir.sequence">
+            <field name="name">Sequence Item Menu</field>
+            <field name="code">pipinos.item.menu</field>
+            <field name="prefix">MENU-</field>
+            <field name="padding">4</field>
+        </record>
+
+        <!-- Demografi -->
+        <record id="seq_pipinos_demografi" model="ir.sequence">
+            <field name="name">Sequence Demografi</field>
+            <field name="code">pipinos.demografi</field>
+            <field name="prefix">DEMO-</field>
+            <field name="padding">4</field>
+        </record>
+
+        <!-- Loyalty Member -->
+        <record id="seq_pipinos_loyalty_member" model="ir.sequence">
+            <field name="name">Sequence Loyalty Member</field>
+            <field name="code">pipinos.loyalty.member</field>
+            <field name="prefix">LOY-</field>
+            <field name="padding">4</field>
+        </record>
+
+        <!-- Staff -->
+        <record id="seq_pipinos_staff" model="ir.sequence">
+            <field name="name">Sequence Staff</field>
+            <field name="code">pipinos.staff</field>
+            <field name="prefix">STF-</field>
+            <field name="padding">4</field>
+        </record>
+
+        <!-- Log Akses -->
+        <record id="seq_pipinos_log_akses" model="ir.sequence">
+            <field name="name">Sequence Log Akses</field>
+            <field name="code">pipinos.log.akses</field>
+            <field name="prefix">LOG-</field>
+            <field name="padding">4</field>
+        </record>
+
+        <!-- Segmen -->
+        <record id="seq_pipinos_segmen" model="ir.sequence">
+            <field name="name">Sequence Segmen</field>
+            <field name="code">pipinos.segmen</field>
+            <field name="prefix">SEG-</field>
+            <field name="padding">4</field>
+        </record>
+
+        <!-- Kampanye -->
+        <record id="seq_pipinos_kampanye" model="ir.sequence">
+            <field name="name">Sequence Kampanye</field>
+            <field name="code">pipinos.kampanye</field>
+            <field name="prefix">CMP-</field>
+            <field name="padding">4</field>
+        </record>
+    </data>
+</odoo>

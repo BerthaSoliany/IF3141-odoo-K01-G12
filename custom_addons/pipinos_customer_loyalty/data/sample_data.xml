@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Tabel Pelanggan -->
+        <record id="pelanggan_1" model="pipinos.pelanggan">
+            <field name="id_pelanggan">CUST-0001</field>
+            <field name="nama_depan">Budi</field>
+            <field name="nama_belakang">Santoso</field>
+            <field name="no_hp">08123456789</field>
+        </record>
+        
+        <record id="pelanggan_2" model="pipinos.pelanggan">
+            <field name="id_pelanggan">CUST-0002</field>
+            <field name="nama_depan">Siti</field>
+            <field name="nama_belakang">Aminah</field>
+            <field name="no_hp">08987654321</field>
+        </record>
+
+        <!-- Tabel Demografi -->
+        <record id="demografi_1" model="pipinos.demografi">
+            <field name="id_demografi">DEMO-0001</field>
+            <field name="id_pelanggan" ref="pelanggan_1"/>
+            <field name="usia">25</field>
+            <field name="gender">L</field>
+        </record>
+
+        <record id="demografi_2" model="pipinos.demografi">
+            <field name="id_demografi">DEMO-0002</field>
+            <field name="id_pelanggan" ref="pelanggan_2"/>
+            <field name="usia">19</field>
+            <field name="gender">P</field>
+        </record>
+
+        <!-- Tabel Loyalty -->
+        <record id="loyalty_1" model="pipinos.loyalty.member">
+            <field name="id_loyalty">LOY-0001</field>
+            <field name="id_pelanggan" ref="pelanggan_1"/>
+            <field name="total_poin">150</field>
+            <field name="status_level">gold</field>
+        </record>
+
+        <record id="loyalty_2" model="pipinos.loyalty.member">
+            <field name="id_loyalty">LOY-0002</field>
+            <field name="id_pelanggan" ref="pelanggan_2"/>
+            <field name="total_poin">30</field>
+            <field name="status_level">silver</field>
+        </record>
+
+        <!-- Tabel Staff -->
+        <record id="staff_1" model="pipinos.staff">
+            <field name="id_staff">STF-0001</field>
+            <field name="nama_staff">Andi Admin</field>
+            <field name="role">admin</field>
+            <field name="username">admin.andi</field>
+        </record>
+
+        <record id="staff_2" model="pipinos.staff">
+            <field name="id_staff">STF-0002</field>
+            <field name="nama_staff">Rina Kasir</field>
+            <field name="role">kasir</field>
+            <field name="username">kasir.rina</field>
+        </record>
+    </data>
+</odoo>
