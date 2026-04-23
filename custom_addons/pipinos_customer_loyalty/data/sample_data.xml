@@ -6,14 +6,12 @@
             <field name="id_segmen">SEG-0001</field>
             <field name="nama_segmen">Pelajar Sore</field>
             <field name="kriteria">Usia 17-25, kunjungan sore, suka menu ringan</field>
-            <field name="deskripsi">pengunjung pelajar dengan pola kunjungan sore.</field>
         </record>
 
         <record id="segmen_2" model="pipinos.segmen">
             <field name="id_segmen">SEG-0002</field>
             <field name="nama_segmen">Keluarga Akhir Pekan</field>
             <field name="kriteria">Kunjungan akhir pekan, pembelian menu sharing</field>
-            <field name="deskripsi">pengunjung keluarga yang dominan datang di akhir pekan.</field>
         </record>
 
         <!-- Konfigurasi Konversi Poin -->
