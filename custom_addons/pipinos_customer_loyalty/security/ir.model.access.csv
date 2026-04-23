@@ -8,4 +8,5 @@ access_loyalty,pipinos.loyalty.member,model_pipinos_loyalty_member,,1,1,1,1
 access_segmen,pipinos.segmen,model_pipinos_segmen,,1,1,1,1
 access_terdaftar,pipinos.terdaftar,model_pipinos_terdaftar,,1,1,1,1
 access_loyalty_level_config,pipinos.loyalty.level.config,model_pipinos_loyalty_level_config,,1,1,1,1
+access_point_conversion_config,pipinos.point.conversion.config,model_pipinos_point_conversion_config,,1,1,1,1
 access_kampanye,pipinos.kampanye,model_pipinos_kampanye,,1,1,1,1

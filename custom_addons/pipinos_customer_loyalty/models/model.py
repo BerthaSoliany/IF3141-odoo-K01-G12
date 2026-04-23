@@ -12,6 +12,7 @@ class Pelanggan(models.Model):
     nama_belakang = fields.Char(string='Nama Belakang')
     nama_lengkap = fields.Char(string='Nama Lengkap', compute='_compute_nama_lengkap', store=True)
     no_hp = fields.Char(string='No HP')
+    favorite_menu_id = fields.Many2one('pipinos.item.menu', string='Menu Favorit', compute='_compute_favorite_menu')
     terdaftar_ids = fields.One2many('pipinos.terdaftar', 'pelanggan_id', string='Terdaftar Segmen')
     segmen_ids = fields.Many2many('pipinos.segmen', string='Segmen Pelanggan', compute='_compute_segmen_ids', inverse='_inverse_segmen_ids')
 
@@ -39,6 +40,23 @@ class Pelanggan(models.Model):
     def _compute_segmen_ids(self):
         for rec in self:
             rec.segmen_ids = rec.terdaftar_ids.mapped('segmen_id')
+
+    def _compute_favorite_menu(self):
+        detail_obj = self.env['pipinos.detail.transaksi']
+        for rec in self:
+            grouped = detail_obj.read_group(
+                domain=[('id_pelanggan', '=', rec.id), ('id_menu', '!=', False)],
+                fields=['qty:sum', 'id_menu'],
+                groupby=['id_menu'],
+            )
+            if grouped:
+                best = max(grouped, key=lambda x: x.get('qty_sum', 0))
+            else:
+                best = False
+            if best and best.get('id_menu'):
+                rec.favorite_menu_id = best['id_menu'][0]
+            else:
+                rec.favorite_menu_id = False
 
     def _inverse_segmen_ids(self):
         for rec in self:
@@ -195,6 +213,7 @@ class LoyaltyMember(models.Model):
 
     id_loyalty = fields.Char(string='ID Loyalty', required=True, copy=False, readonly=True, default=lambda self: 'Baru')
     id_pelanggan = fields.Many2one('pipinos.pelanggan', string='Pelanggan (FK)', required=True, ondelete='cascade')
+    no_hp = fields.Char(string='No HP', related='id_pelanggan.no_hp', readonly=True)
     total_poin = fields.Integer(string='Total Poin')
     status_level = fields.Selection([
         ('silver', 'Silver'),
@@ -239,6 +258,7 @@ class SegmenPelanggan(models.Model):
     id_segmen = fields.Char(string='ID Segmen', required=True, copy=False, readonly=True, default=lambda self: 'Baru')
     nama_segmen = fields.Char(string='Nama Segmen')
     kriteria = fields.Text(string='Kriteria')
+    deskripsi = fields.Text(string='Deskripsi')
     terdaftar_ids = fields.One2many('pipinos.terdaftar', 'segmen_id', string='Data Pendaftaran')
     pelanggan_ids = fields.Many2many('pipinos.pelanggan', string='Pelanggan Terdaftar', compute='_compute_pelanggan_ids')
 
@@ -277,6 +297,17 @@ class LoyaltyLevelConfig(models.Model):
     threshold_points = fields.Integer(string='Threshold Poin', required=True)
     active = fields.Boolean(string='Active', default=True)
     notes = fields.Text(string='Catatan')
+
+
+class PointConversionConfig(models.Model):
+    _name = 'pipinos.point.conversion.config'
+    _description = 'Konfigurasi Konversi Poin'
+    _rec_name = 'name'
+
+    name = fields.Char(string='Nama Konfigurasi', required=True, default='Default Konversi Poin')
+    nominal_rupiah = fields.Integer(string='Nominal Rupiah', required=True, default=10000)
+    point_value = fields.Integer(string='Poin Dihasilkan', required=True, default=1)
+    active = fields.Boolean(string='Active', default=True)
 
 class Kampanye(models.Model):
     _name = 'pipinos.kampanye'
