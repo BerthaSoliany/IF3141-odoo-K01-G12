@@ -6,14 +6,14 @@
             <field name="id_segmen">SEG-0001</field>
             <field name="nama_segmen">Pelajar Sore</field>
             <field name="kriteria">Usia 17-25, kunjungan sore, suka menu ringan</field>
-            <field name="deskripsi">Pelanggan pelajar dengan pola kunjungan sore.</field>
+            <field name="deskripsi">pengunjung pelajar dengan pola kunjungan sore.</field>
         </record>
 
         <record id="segmen_2" model="pipinos.segmen">
             <field name="id_segmen">SEG-0002</field>
             <field name="nama_segmen">Keluarga Akhir Pekan</field>
             <field name="kriteria">Kunjungan akhir pekan, pembelian menu sharing</field>
-            <field name="deskripsi">Pelanggan keluarga yang dominan datang di akhir pekan.</field>
+            <field name="deskripsi">pengunjung keluarga yang dominan datang di akhir pekan.</field>
         </record>
 
         <!-- Konfigurasi Konversi Poin -->
@@ -24,16 +24,16 @@
             <field name="active">1</field>
         </record>
 
-        <!-- Tabel Pelanggan -->
-        <record id="pelanggan_1" model="pipinos.pelanggan">
-            <field name="id_pelanggan">CUST-0001</field>
+        <!-- Tabel pengunjung -->
+        <record id="pengunjung_1" model="pipinos.pengunjung">
+            <field name="id_pengunjung">CUST-0001</field>
             <field name="nama_depan">Budi</field>
             <field name="nama_belakang">Santoso</field>
             <field name="no_hp">08123456789</field>
         </record>
         
-        <record id="pelanggan_2" model="pipinos.pelanggan">
-            <field name="id_pelanggan">CUST-0002</field>
+        <record id="pengunjung_2" model="pipinos.pengunjung">
+            <field name="id_pengunjung">CUST-0002</field>
             <field name="nama_depan">Siti</field>
             <field name="nama_belakang">Aminah</field>
             <field name="no_hp">08987654321</field>
@@ -41,19 +41,19 @@
 
         <!-- Tabel Terdaftar -->
         <record id="terdaftar_1" model="pipinos.terdaftar">
-            <field name="pelanggan_id" ref="pelanggan_1"/>
+            <field name="pengunjung_id" ref="pengunjung_1"/>
             <field name="segmen_id" ref="segmen_1"/>
             <field name="daftar_sejak">2026-04-01</field>
         </record>
 
         <record id="terdaftar_2" model="pipinos.terdaftar">
-            <field name="pelanggan_id" ref="pelanggan_2"/>
+            <field name="pengunjung_id" ref="pengunjung_2"/>
             <field name="segmen_id" ref="segmen_2"/>
             <field name="daftar_sejak">2026-04-02</field>
         </record>
 
         <record id="terdaftar_3" model="pipinos.terdaftar">
-            <field name="pelanggan_id" ref="pelanggan_1"/>
+            <field name="pengunjung_id" ref="pengunjung_1"/>
             <field name="segmen_id" ref="segmen_2"/>
             <field name="daftar_sejak">2026-04-10</field>
         </record>
@@ -61,14 +61,14 @@
         <!-- Tabel Demografi -->
         <record id="demografi_1" model="pipinos.demografi">
             <field name="id_demografi">DEMO-0001</field>
-            <field name="id_pelanggan" ref="pelanggan_1"/>
+            <field name="id_pengunjung" ref="pengunjung_1"/>
             <field name="usia">25</field>
             <field name="gender">L</field>
         </record>
 
         <record id="demografi_2" model="pipinos.demografi">
             <field name="id_demografi">DEMO-0002</field>
-            <field name="id_pelanggan" ref="pelanggan_2"/>
+            <field name="id_pengunjung" ref="pengunjung_2"/>
             <field name="usia">19</field>
             <field name="gender">P</field>
         </record>
@@ -92,13 +92,13 @@
         <!-- Tabel Loyalty -->
         <record id="loyalty_1" model="pipinos.loyalty.member">
             <field name="id_loyalty">LOY-0001</field>
-            <field name="id_pelanggan" ref="pelanggan_1"/>
+            <field name="id_pengunjung" ref="pengunjung_1"/>
             <field name="total_poin">150</field>
         </record>
 
         <record id="loyalty_2" model="pipinos.loyalty.member">
             <field name="id_loyalty">LOY-0002</field>
-            <field name="id_pelanggan" ref="pelanggan_2"/>
+            <field name="id_pengunjung" ref="pengunjung_2"/>
             <field name="total_poin">30</field>
         </record>
 
@@ -127,21 +127,21 @@
         <!-- Tabel Transaksi -->
         <record id="transaksi_1" model="pipinos.transaksi">
             <field name="id_transaksi">TRX-0001</field>
-            <field name="id_pelanggan" ref="pelanggan_1"/>
+            <field name="id_pengunjung" ref="pengunjung_1"/>
             <field name="tanggal">2026-04-21 16:30:00</field>
             <field name="total_nominal">53000</field>
         </record>
 
         <record id="transaksi_2" model="pipinos.transaksi">
             <field name="id_transaksi">TRX-0002</field>
-            <field name="id_pelanggan" ref="pelanggan_1"/>
+            <field name="id_pengunjung" ref="pengunjung_1"/>
             <field name="tanggal">2026-04-22 16:15:00</field>
             <field name="total_nominal">28000</field>
         </record>
 
         <record id="transaksi_3" model="pipinos.transaksi">
             <field name="id_transaksi">TRX-0003</field>
-            <field name="id_pelanggan" ref="pelanggan_2"/>
+            <field name="id_pengunjung" ref="pengunjung_2"/>
             <field name="tanggal">2026-04-22 12:05:00</field>
             <field name="total_nominal">67000</field>
         </record>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data noupdate="1">
-        <!-- Pelanggan -->
-        <record id="seq_pipinos_pelanggan" model="ir.sequence">
-            <field name="name">Sequence Pelanggan</field>
-            <field name="code">pipinos.pelanggan</field>
+        <!-- pengunjung -->
+        <record id="seq_pipinos_pengunjung" model="ir.sequence">
+            <field name="name">Sequence pengunjung</field>
+            <field name="code">pipinos.pengunjung</field>
             <field name="prefix">CUST-</field>
             <field name="padding">4</field>
         </record>
