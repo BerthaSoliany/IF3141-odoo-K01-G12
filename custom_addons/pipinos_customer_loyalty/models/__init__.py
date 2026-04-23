@@ -1,1 +1,1 @@
-from .model import Pelanggan, Transaksi, DetailTransaksi, ItemMenu, Demografi, LoyaltyMember, Staff, LogAksesStaf, SegmenPelanggan, Kampanye
+from .model import Pelanggan, Transaksi, DetailTransaksi, ItemMenu, Demografi, LoyaltyMember, SegmenPelanggan, Terdaftar, LoyaltyLevelConfig, Kampanye

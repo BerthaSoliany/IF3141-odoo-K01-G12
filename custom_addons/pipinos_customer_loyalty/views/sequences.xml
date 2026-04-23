@@ -49,21 +49,6 @@
             <field name="padding">4</field>
         </record>
 
-        <!-- Staff -->
-        <record id="seq_pipinos_staff" model="ir.sequence">
-            <field name="name">Sequence Staff</field>
-            <field name="code">pipinos.staff</field>
-            <field name="prefix">STF-</field>
-            <field name="padding">4</field>
-        </record>
-
-        <!-- Log Akses -->
-        <record id="seq_pipinos_log_akses" model="ir.sequence">
-            <field name="name">Sequence Log Akses</field>
-            <field name="code">pipinos.log.akses</field>
-            <field name="prefix">LOG-</field>
-            <field name="padding">4</field>
-        </record>
 
         <!-- Segmen -->
         <record id="seq_pipinos_segmen" model="ir.sequence">
