@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_pipinos_pengunjung" model="ir.actions.act_window">
+        <field name="name">Data pengunjung</field>
+        <field name="res_model">pipinos.pengunjung</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="view_pengunjung_tree" model="ir.ui.view">
+        <field name="name">pipinos.pengunjung.tree</field>
+        <field name="model">pipinos.pengunjung</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="nama_lengkap"/>
+                <field name="no_hp"/>
+                <field name="favorite_menu_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_pengunjung_form" model="ir.ui.view">
+        <field name="name">pipinos.pengunjung.form</field>
+        <field name="model">pipinos.pengunjung</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="id_pengunjung" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <field name="nama_depan"/>
+                        <field name="nama_belakang"/>
+                        <field name="no_hp"/>
+                        <field name="segmen_ids" widget="many2many_tags"/>
+                    </group>
+                    
+                    <notebook>
+                        <page string="Data Demografi">
+                            <group>
+                                <field name="usia_input"/>
+                                <field name="gender_input"/>
+                            </group>
+                        </page>
+                        <page string="Status Loyalty">
+                            <group>
+                                <field name="total_poin_input"/>
+                                <field name="status_level_output" widget="badge" decoration-warning="status_level_output=='gold'" decoration-info="status_level_output=='silver'"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!-- search biar bisa pk nama pengunjung -->
+    <record id="view_pengunjung_search" model="ir.ui.view">
+        <field name="name">pipinos.pengunjung.search</field>
+        <field name="model">pipinos.pengunjung</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="nama_lengkap" string="Pencarian Nama" filter_domain="['|', '|', ('nama_lengkap', 'ilike', self), ('nama_depan', 'ilike', self), ('nama_belakang', 'ilike', self)]"/>
+                <field name="id_pengunjung" string="Cari ID pengunjung"/>
+                <field name="no_hp" string="Cari No Telp"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_pipinos_kampanye" model="ir.actions.act_window">
+        <field name="name">Data Kampanye</field>
+        <field name="res_model">pipinos.kampanye</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="view_kampanye_tree" model="ir.ui.view">
+        <field name="name">pipinos.kampanye.tree</field>
+        <field name="model">pipinos.kampanye</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="nama_kampanye"/>
+                <field name="tgl_mulai"/>
+                <field name="tgl_selesai"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_kampanye_form" model="ir.ui.view">
+        <field name="name">pipinos.kampanye.form</field>
+        <field name="model">pipinos.kampanye</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title"><h1><field name="id_kampanye" readonly="1"/></h1></div>
+                    <group>
+                        <field name="nama_kampanye"/>
+                        <field name="tgl_mulai"/>
+                        <field name="tgl_selesai"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_pipinos_segmen" model="ir.actions.act_window">
+        <field name="name">Segmen pengunjung</field>
+        <field name="res_model">pipinos.segmen</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="view_segmen_tree" model="ir.ui.view">
+        <field name="name">pipinos.segmen.tree</field>
+        <field name="model">pipinos.segmen</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="nama_segmen"/>
+                <field name="kriteria"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_segmen_form" model="ir.ui.view">
+        <field name="name">pipinos.segmen.form</field>
+        <field name="model">pipinos.segmen</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title"><h1><field name="id_segmen" readonly="1"/></h1></div>
+                    <group>
+                        <field name="nama_segmen"/>
+                        <field name="kriteria"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
