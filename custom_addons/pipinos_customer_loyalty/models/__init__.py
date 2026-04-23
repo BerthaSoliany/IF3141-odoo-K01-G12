@@ -1,1 +1,3 @@
-from .model import Pelanggan, Transaksi, DetailTransaksi, ItemMenu, Demografi, LoyaltyMember, SegmenPelanggan, Terdaftar, LoyaltyLevelConfig, PointConversionConfig, Kampanye
+from . import pengunjung
+from . import loyalty
+from . import transaksi
