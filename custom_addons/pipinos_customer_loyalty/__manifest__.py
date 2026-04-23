@@ -1,5 +1,5 @@
 {
-    "name": "PIPINOS Customer Loyalty",
+    "name": "PIPINOS Customer Intelligence & Loyalty System",
     "summary": "Sistem demografi, loyalty, dan analitik pelanggan untuk PIPINOS",
     "version": "1.0",
     "author": "G12",
