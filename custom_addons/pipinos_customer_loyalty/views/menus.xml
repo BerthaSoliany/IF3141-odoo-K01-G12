@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <menuitem id="menu_root" name="PIPINOS Customer Intelligence &amp; Loyalty System" sequence="10"/>
+
+    <menuitem id="menu_data_root" name="Menu Data" parent="menu_root" sequence="1"/>
+    
+    <menuitem id="menu_pengunjung" name="Data pengunjung" parent="menu_data_root" action="action_pipinos_pengunjung" sequence="1"/>
+    <menuitem id="menu_item" name="Menu Resto" parent="menu_data_root" action="action_pipinos_menu" sequence="2"/>
+    <menuitem id="menu_kampanye" name="Kampanye" parent="menu_data_root" action="action_pipinos_kampanye" sequence="3"/>
+    <menuitem id="menu_segmen" name="Segmen pengunjung" parent="menu_data_root" action="action_pipinos_segmen" sequence="4"/>
+    <menuitem id="menu_loyalty_config" name="Konfigurasi Status Level" parent="menu_data_root" action="action_pipinos_loyalty_level_config" sequence="5"/>
+    <menuitem id="menu_admin_point_conversion_config" name="Konfigurasi Konversi Poin" parent="menu_data_root" action="action_pipinos_point_conversion_config" sequence="6"/>
+    <menuitem id="menu_loyalty" name="Loyalty pengunjung" parent="menu_data_root" action="action_pipinos_loyalty" sequence="6"/>
+    <menuitem id="menu_transaksi" name="Riwayat Transaksi" parent="menu_data_root" action="action_pipinos_transaksi" sequence="7"/>
+
+
+    <menuitem id="menu_dashboard_root" name="Dashboard Analitik" parent="menu_root" sequence="2"/>
+    
+    <menuitem id="menu_dashboard_age_gender" name="Avg Usia per Gender" parent="menu_dashboard_root" action="action_pipinos_dashboard_age_gender" sequence="1"/>
+    <menuitem id="menu_dashboard_gender_count" name="Count per Gender" parent="menu_dashboard_root" action="action_pipinos_dashboard_gender_count" sequence="2"/>
+    <menuitem id="menu_dashboard_segment" name="Segmen pengunjung" parent="menu_dashboard_root" action="action_pipinos_dashboard_segment" sequence="3"/>
+    <menuitem id="menu_dashboard_visit_frequency" name="Frekuensi Kunjungan" parent="menu_dashboard_root" action="action_pipinos_dashboard_visit_frequency" sequence="4"/>
+    <menuitem id="menu_dashboard_status_level" name="Count Status Level" parent="menu_dashboard_root" action="action_pipinos_dashboard_status_level" sequence="5"/>
+    <menuitem id="menu_dashboard_favorite_menu" name="Menu Favorit pengunjung" parent="menu_dashboard_root" action="action_pipinos_dashboard_favorite_menu" sequence="6"/>
+    <menuitem id="menu_dashboard_menu_count" name="Count per Menu" parent="menu_dashboard_root" action="action_pipinos_dashboard_menu_count" sequence="7"/>
+ 
+    </odoo>
