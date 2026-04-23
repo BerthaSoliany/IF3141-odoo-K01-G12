@@ -6,11 +6,11 @@
     "depends": ["base"],
     "data": [
         "security/ir.model.access.csv",
-        "views/menus.xml",
         "views/pengunjung_views.xml",
         "views/loyalty_views.xml",
         "views/transaksi_views.xml",
         "views/dashboard_analitik_views.xml",
+        "views/menus.xml",
         "views/sequences.xml",
         "data/sample_data.xml"
     ],
