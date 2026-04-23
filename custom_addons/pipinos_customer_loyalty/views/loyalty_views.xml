@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_pipinos_loyalty" model="ir.actions.act_window">
+        <field name="name">Sistem Loyalty (Kasir)</field>
+        <field name="res_model">pipinos.loyalty.member</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="view_loyalty_tree" model="ir.ui.view">
+        <field name="name">pipinos.loyalty.member.tree</field>
+        <field name="model">pipinos.loyalty.member</field>
+        <field name="arch" type="xml">
+            <tree string="Daftar Member Loyalty">
+                <field name="id_pengunjung" string="Nama pengunjung"/>
+                <field name="no_hp"/>
+                <field name="total_poin"/>
+                <field name="status_level" widget="badge" decoration-warning="status_level=='gold'" decoration-info="status_level=='silver'"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_loyalty_form" model="ir.ui.view">
+        <field name="name">pipinos.loyalty.member.form</field>
+        <field name="model">pipinos.loyalty.member</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="id_pengunjung" class="oe_edit_only" string="Nama pengunjung"/>
+                        <h1><field name="id_pengunjung" options="{'no_quick_create': True}"/></h1>
+                    </div>
+                    <group string="Evaluasi Status &amp; Reward">
+                        <field name="no_hp" readonly="1"/>
+                        <field name="total_poin"/>
+                        <field name="status_level" widget="badge" decoration-warning="status_level=='gold'" decoration-info="status_level=='silver'"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- search biar bisa pk nama pengunjung -->
+    <record id="view_loyalty_search" model="ir.ui.view">
+        <field name="name">pipinos.loyalty.member.search</field>
+        <field name="model">pipinos.loyalty.member</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="id_pengunjung" string="Cari Nama pengunjung" filter_domain="['|', '|', ('id_pengunjung.nama_lengkap', 'ilike', self), ('id_pengunjung.nama_depan', 'ilike', self), ('id_pengunjung.nama_belakang', 'ilike', self)]"/>
+                <field name="id_loyalty" string="Cari ID Loyalty"/>
+            </search>
+        </field>
+    </record>
+
+
+
+    <record id="view_loyalty_level_config_tree" model="ir.ui.view">
+        <field name="name">pipinos.loyalty.level.config.tree</field>
+        <field name="model">pipinos.loyalty.level.config</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="threshold_points"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+    
+    <record id="view_loyalty_level_config_form" model="ir.ui.view">
+        <field name="name">pipinos.loyalty.level.config.form</field>
+        <field name="model">pipinos.loyalty.level.config</field>
+        <field name="arch" type="xml">
+            <form string="Konfigurasi Status Level Loyalty">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="threshold_points"/>
+                        <field name="active"/>
+                    </group>
+                    <group>
+                        <field name="notes"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_pipinos_loyalty_level_config" model="ir.actions.act_window">
+        <field name="name">Konfigurasi Status Level Loyalty</field>
+        <field name="res_model">pipinos.loyalty.level.config</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_loyalty_level_config_tree"/>
+    </record>
+
+
+
+    <record id="view_point_conversion_config_tree" model="ir.ui.view">
+        <field name="name">pipinos.point.conversion.config.tree</field>
+        <field name="model">pipinos.point.conversion.config</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="nominal_rupiah"/>
+                <field name="point_value"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_point_conversion_config_form" model="ir.ui.view">
+        <field name="name">pipinos.point.conversion.config.form</field>
+        <field name="model">pipinos.point.conversion.config</field>
+        <field name="arch" type="xml">
+            <form string="Konfigurasi Konversi Poin">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="nominal_rupiah"/>
+                        <field name="point_value"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_pipinos_point_conversion_config" model="ir.actions.act_window">
+        <field name="name">Konfigurasi Konversi Poin</field>
+        <field name="res_model">pipinos.point.conversion.config</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_point_conversion_config_tree"/>
+    </record>
+
+</odoo>
