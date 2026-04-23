@@ -19,6 +19,7 @@
                         <field name="nama_depan"/>
                         <field name="nama_belakang"/>
                         <field name="no_hp"/>
+                        <field name="segmen_ids" widget="many2many_tags"/>
                     </group>
                     
                     <notebook>
@@ -38,6 +39,44 @@
                 </sheet>
             </form>
         </field>
+    </record>
+
+    <record id="view_loyalty_level_config_tree" model="ir.ui.view">
+        <field name="name">pipinos.loyalty.level.config.tree</field>
+        <field name="model">pipinos.loyalty.level.config</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="threshold_points"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+    
+    <record id="view_loyalty_level_config_form" model="ir.ui.view">
+        <field name="name">pipinos.loyalty.level.config.form</field>
+        <field name="model">pipinos.loyalty.level.config</field>
+        <field name="arch" type="xml">
+            <form string="Konfigurasi Status Level Loyalty">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="threshold_points"/>
+                        <field name="active"/>
+                    </group>
+                    <group>
+                        <field name="notes"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_pipinos_loyalty_level_config" model="ir.actions.act_window">
+        <field name="name">Konfigurasi Status Level Loyalty</field>
+        <field name="res_model">pipinos.loyalty.level.config</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_loyalty_level_config_tree"/>
     </record>
 
     <!-- search biar bisa pk nama pelanggan -->
@@ -103,21 +142,109 @@
         </field>
     </record>
 
-    <record id="action_pipinos_dashboard" model="ir.actions.act_window">
-        <field name="name">Dashboard Analitik</field>
-        <field name="res_model">pipinos.demografi</field>
-        <field name="view_mode">graph,pivot</field>
-    </record>
-
-    <record id="view_demografi_graph" model="ir.ui.view">
-        <field name="name">pipinos.demografi.graph</field>
+    <record id="view_dashboard_age_gender_graph" model="ir.ui.view">
+        <field name="name">pipinos.demografi.dashboard.age.gender.graph</field>
         <field name="model">pipinos.demografi</field>
         <field name="arch" type="xml">
-            <graph string="Analitik Demografi Pengunjung" type="bar">
-                <field name="gender"/>
-                <field name="usia" type="measure"/>
+            <graph string="Avg Usia per Gender" type="bar">
+                <field name="gender" type="row"/>
+                <field name="usia" type="measure" operator="avg"/>
             </graph>
         </field>
+    </record>
+
+    <record id="action_pipinos_dashboard_age_gender" model="ir.actions.act_window">
+        <field name="name">Avg Usia per Gender</field>
+        <field name="res_model">pipinos.demografi</field>
+        <field name="view_mode">graph,tree</field>
+        <field name="view_id" ref="view_dashboard_age_gender_graph"/>
+    </record>
+
+    <record id="view_dashboard_gender_count_graph" model="ir.ui.view">
+        <field name="name">pipinos.demografi.dashboard.gender.count.graph</field>
+        <field name="model">pipinos.demografi</field>
+        <field name="arch" type="xml">
+            <graph string="Count per Gender" type="bar">
+                <field name="gender" type="row"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="action_pipinos_dashboard_gender_count" model="ir.actions.act_window">
+        <field name="name">Count per Gender</field>
+        <field name="res_model">pipinos.demografi</field>
+        <field name="view_mode">graph,tree</field>
+        <field name="view_id" ref="view_dashboard_gender_count_graph"/>
+    </record>
+
+    <record id="view_dashboard_segment_graph" model="ir.ui.view">
+        <field name="name">pipinos.terdaftar.dashboard.segment.graph</field>
+        <field name="model">pipinos.terdaftar</field>
+        <field name="arch" type="xml">
+            <graph string="Segmen Pelanggan" type="bar">
+                <field name="segmen_id" type="row"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="action_pipinos_dashboard_segment" model="ir.actions.act_window">
+        <field name="name">Segmen Pelanggan</field>
+        <field name="res_model">pipinos.terdaftar</field>
+        <field name="view_mode">graph,tree</field>
+        <field name="view_id" ref="view_dashboard_segment_graph"/>
+    </record>
+
+    <record id="view_dashboard_visit_graph" model="ir.ui.view">
+        <field name="name">pipinos.transaksi.dashboard.visit.graph</field>
+        <field name="model">pipinos.transaksi</field>
+        <field name="arch" type="xml">
+            <graph string="Frekuensi Kunjungan Pelanggan" type="bar">
+                <field name="id_pelanggan" type="row"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="action_pipinos_dashboard_visit_frequency" model="ir.actions.act_window">
+        <field name="name">Frekuensi Kunjungan Pelanggan</field>
+        <field name="res_model">pipinos.transaksi</field>
+        <field name="view_mode">graph,tree</field>
+        <field name="view_id" ref="view_dashboard_visit_graph"/>
+    </record>
+
+    <record id="view_dashboard_status_graph" model="ir.ui.view">
+        <field name="name">pipinos.loyalty.member.dashboard.status.graph</field>
+        <field name="model">pipinos.loyalty.member</field>
+        <field name="arch" type="xml">
+            <graph string="Count Status Level" type="bar">
+                <field name="status_level" type="row"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="action_pipinos_dashboard_status_level" model="ir.actions.act_window">
+        <field name="name">Count Status Level</field>
+        <field name="res_model">pipinos.loyalty.member</field>
+        <field name="view_mode">graph,tree</field>
+        <field name="view_id" ref="view_dashboard_status_graph"/>
+    </record>
+
+    <record id="view_dashboard_favorite_menu_pivot" model="ir.ui.view">
+        <field name="name">pipinos.detail.transaksi.dashboard.favorite.menu.pivot</field>
+        <field name="model">pipinos.detail.transaksi</field>
+        <field name="arch" type="xml">
+            <pivot string="Menu Favorit Pelanggan">
+                <field name="id_pelanggan" type="row"/>
+                <field name="id_menu" type="col"/>
+                <field name="qty" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="action_pipinos_dashboard_favorite_menu" model="ir.actions.act_window">
+        <field name="name">Menu Favorit Pelanggan</field>
+        <field name="res_model">pipinos.detail.transaksi</field>
+        <field name="view_mode">pivot,tree</field>
+        <field name="view_id" ref="view_dashboard_favorite_menu_pivot"/>
     </record>
 
     <record id="action_pipinos_menu" model="ir.actions.act_window">
@@ -158,28 +285,6 @@
                         <field name="nama_kampanye"/>
                         <field name="tgl_mulai"/>
                         <field name="tgl_selesai"/>
-                    </group>
-                </sheet>
-            </form>
-        </field>
-    </record>
-
-    <record id="action_pipinos_staff" model="ir.actions.act_window">
-        <field name="name">Master Data Staff</field>
-        <field name="res_model">pipinos.staff</field>
-        <field name="view_mode">tree,form</field>
-    </record>
-    <record id="view_staff_form" model="ir.ui.view">
-        <field name="name">pipinos.staff.form</field>
-        <field name="model">pipinos.staff</field>
-        <field name="arch" type="xml">
-            <form>
-                <sheet>
-                    <div class="oe_title"><h1><field name="id_staff" readonly="1"/></h1></div>
-                    <group>
-                        <field name="nama_staff"/>
-                        <field name="role"/>
-                        <field name="username"/>
                     </group>
                 </sheet>
             </form>
@@ -245,25 +350,7 @@
         </field>
     </record>
 
-    <record id="action_pipinos_log" model="ir.actions.act_window">
-        <field name="name">Log Akses Staff</field>
-        <field name="res_model">pipinos.log.akses</field>
-        <field name="view_mode">tree</field>
-    </record>
-    <record id="view_log_tree" model="ir.ui.view">
-        <field name="name">pipinos.log.akses.tree</field>
-        <field name="model">pipinos.log.akses</field>
-        <field name="arch" type="xml">
-            <tree create="false" edit="false" delete="false">
-                <field name="id_log"/>
-                <field name="id_staff"/>
-                <field name="timestamp"/>
-                <field name="aksi"/>
-            </tree>
-        </field>
-    </record>
-
-    <menuitem id="menu_pipinos_root" name="PIPINOS App" sequence="10"/>
+    <menuitem id="menu_pipinos_root" name="PIPINOS Customer Intelligence &amp; Loyalty System" sequence="10"/>
     
     <menuitem id="menu_admin_root" name="Admin (Manajemen)" parent="menu_pipinos_root" sequence="1"/>
     
@@ -271,14 +358,19 @@
     <menuitem id="menu_admin_pelanggan" name="Data Pelanggan" parent="menu_admin_master" action="action_pipinos_pelanggan" sequence="1"/>
     <menuitem id="menu_admin_menu" name="Item Menu" parent="menu_admin_master" action="action_pipinos_menu" sequence="2"/>
     <menuitem id="menu_admin_kampanye" name="Kampanye Promo" parent="menu_admin_master" action="action_pipinos_kampanye" sequence="3"/>
-    <menuitem id="menu_admin_staff" name="Data Staff" parent="menu_admin_master" action="action_pipinos_staff" sequence="4"/>
     <menuitem id="menu_admin_segmen" name="Segmen Pelanggan" parent="menu_admin_master" action="action_pipinos_segmen" sequence="5"/>
-    
-    <menuitem id="menu_admin_transaksi" name="Riwayat Transaksi" parent="menu_admin_root" action="action_pipinos_transaksi" sequence="2"/>
-    <menuitem id="menu_admin_log" name="Log Akses Staff" parent="menu_admin_root" action="action_pipinos_log" sequence="3"/>
-    <menuitem id="menu_admin_dashboard" name="Dashboard Analitik" parent="menu_admin_root" action="action_pipinos_dashboard" sequence="4"/>
+    <menuitem id="menu_admin_loyalty_level_config" name="Konfigurasi Status Level" parent="menu_admin_master" action="action_pipinos_loyalty_level_config" sequence="7"/>
+    <menuitem id="menu_admin_transaksi" name="Riwayat Transaksi" parent="menu_admin_master" action="action_pipinos_transaksi" sequence="8"/>
+    <menuitem id="menu_admin_loyalty" name="Sistem Loyalty" parent="menu_admin_master" action="action_pipinos_loyalty" sequence="9"/>
+
+    <menuitem id="menu_admin_dashboard_root" name="Dashboard Analitik" parent="menu_admin_root" sequence="3"/>
+    <menuitem id="menu_admin_dashboard_age_gender" name="Avg Usia per Gender" parent="menu_admin_dashboard_root" action="action_pipinos_dashboard_age_gender" sequence="1"/>
+    <menuitem id="menu_admin_dashboard_gender_count" name="Count per Gender" parent="menu_admin_dashboard_root" action="action_pipinos_dashboard_gender_count" sequence="2"/>
+    <menuitem id="menu_admin_dashboard_segment" name="Segmen Pelanggan" parent="menu_admin_dashboard_root" action="action_pipinos_dashboard_segment" sequence="3"/>
+    <menuitem id="menu_admin_dashboard_visit_frequency" name="Frekuensi Kunjungan" parent="menu_admin_dashboard_root" action="action_pipinos_dashboard_visit_frequency" sequence="4"/>
+    <menuitem id="menu_admin_dashboard_status_level" name="Count Status Level" parent="menu_admin_dashboard_root" action="action_pipinos_dashboard_status_level" sequence="5"/>
+    <menuitem id="menu_admin_dashboard_favorite_menu" name="Menu Favorit Pelanggan" parent="menu_admin_dashboard_root" action="action_pipinos_dashboard_favorite_menu" sequence="6"/>
     
     <menuitem id="menu_kasir_root" name="Kasir (Operasional)" parent="menu_pipinos_root" sequence="2"/>
-    <menuitem id="menu_kasir_transaksi" name="Transaksi Baru" parent="menu_kasir_root" action="action_pipinos_transaksi" sequence="1"/>
-    <menuitem id="menu_kasir_loyalty" name="Sistem Loyalty" parent="menu_kasir_root" action="action_pipinos_loyalty" sequence="2"/>
+    <menuitem id="menu_kasir_loyalty" name="Sistem Loyalty" parent="menu_kasir_root" action="action_pipinos_loyalty" sequence="3"/>
 </odoo>

@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data noupdate="1">
+        <!-- Tabel Segmen -->
+        <record id="segmen_1" model="pipinos.segmen">
+            <field name="id_segmen">SEG-0001</field>
+            <field name="nama_segmen">Pelajar Sore</field>
+            <field name="kriteria">Usia 17-25, kunjungan sore, suka menu ringan</field>
+        </record>
+
+        <record id="segmen_2" model="pipinos.segmen">
+            <field name="id_segmen">SEG-0002</field>
+            <field name="nama_segmen">Keluarga Akhir Pekan</field>
+            <field name="kriteria">Kunjungan akhir pekan, pembelian menu sharing</field>
+        </record>
+
         <!-- Tabel Pelanggan -->
         <record id="pelanggan_1" model="pipinos.pelanggan">
             <field name="id_pelanggan">CUST-0001</field>
@@ -14,6 +27,25 @@
             <field name="nama_depan">Siti</field>
             <field name="nama_belakang">Aminah</field>
             <field name="no_hp">08987654321</field>
+        </record>
+
+        <!-- Tabel Terdaftar -->
+        <record id="terdaftar_1" model="pipinos.terdaftar">
+            <field name="pelanggan_id" ref="pelanggan_1"/>
+            <field name="segmen_id" ref="segmen_1"/>
+            <field name="daftar_sejak">2026-04-01</field>
+        </record>
+
+        <record id="terdaftar_2" model="pipinos.terdaftar">
+            <field name="pelanggan_id" ref="pelanggan_2"/>
+            <field name="segmen_id" ref="segmen_2"/>
+            <field name="daftar_sejak">2026-04-02</field>
+        </record>
+
+        <record id="terdaftar_3" model="pipinos.terdaftar">
+            <field name="pelanggan_id" ref="pelanggan_1"/>
+            <field name="segmen_id" ref="segmen_2"/>
+            <field name="daftar_sejak">2026-04-10</field>
         </record>
 
         <!-- Tabel Demografi -->
@@ -31,34 +63,118 @@
             <field name="gender">P</field>
         </record>
 
+        <!-- Konfigurasi Status Level Loyalty -->
+        <record id="loyalty_level_silver" model="pipinos.loyalty.level.config">
+            <field name="name">Silver</field>
+            <field name="threshold_points">0</field>
+        </record>
+
+        <record id="loyalty_level_gold" model="pipinos.loyalty.level.config">
+            <field name="name">Gold</field>
+            <field name="threshold_points">100</field>
+        </record>
+
+        <record id="loyalty_level_platinum" model="pipinos.loyalty.level.config">
+            <field name="name">Platinum</field>
+            <field name="threshold_points">300</field>
+        </record>
+
         <!-- Tabel Loyalty -->
         <record id="loyalty_1" model="pipinos.loyalty.member">
             <field name="id_loyalty">LOY-0001</field>
             <field name="id_pelanggan" ref="pelanggan_1"/>
             <field name="total_poin">150</field>
-            <field name="status_level">gold</field>
         </record>
 
         <record id="loyalty_2" model="pipinos.loyalty.member">
             <field name="id_loyalty">LOY-0002</field>
             <field name="id_pelanggan" ref="pelanggan_2"/>
             <field name="total_poin">30</field>
-            <field name="status_level">silver</field>
         </record>
 
-        <!-- Tabel Staff -->
-        <record id="staff_1" model="pipinos.staff">
-            <field name="id_staff">STF-0001</field>
-            <field name="nama_staff">Andi Admin</field>
-            <field name="role">admin</field>
-            <field name="username">admin.andi</field>
+        <!-- Tabel Menu -->
+        <record id="menu_1" model="pipinos.item.menu">
+            <field name="id_menu">MENU-0001</field>
+            <field name="nama_menu">Iced Latte</field>
+            <field name="harga">28000</field>
+            <field name="kategori">Minuman</field>
         </record>
 
-        <record id="staff_2" model="pipinos.staff">
-            <field name="id_staff">STF-0002</field>
-            <field name="nama_staff">Rina Kasir</field>
-            <field name="role">kasir</field>
-            <field name="username">kasir.rina</field>
+        <record id="menu_2" model="pipinos.item.menu">
+            <field name="id_menu">MENU-0002</field>
+            <field name="nama_menu">Choco Croffle</field>
+            <field name="harga">25000</field>
+            <field name="kategori">Snack</field>
+        </record>
+
+        <record id="menu_3" model="pipinos.item.menu">
+            <field name="id_menu">MENU-0003</field>
+            <field name="nama_menu">Beef Rice Bowl</field>
+            <field name="harga">42000</field>
+            <field name="kategori">Makanan</field>
+        </record>
+
+        <!-- Tabel Transaksi -->
+        <record id="transaksi_1" model="pipinos.transaksi">
+            <field name="id_transaksi">TRX-0001</field>
+            <field name="id_pelanggan" ref="pelanggan_1"/>
+            <field name="tanggal">2026-04-21 16:30:00</field>
+            <field name="total_nominal">53000</field>
+        </record>
+
+        <record id="transaksi_2" model="pipinos.transaksi">
+            <field name="id_transaksi">TRX-0002</field>
+            <field name="id_pelanggan" ref="pelanggan_1"/>
+            <field name="tanggal">2026-04-22 16:15:00</field>
+            <field name="total_nominal">28000</field>
+        </record>
+
+        <record id="transaksi_3" model="pipinos.transaksi">
+            <field name="id_transaksi">TRX-0003</field>
+            <field name="id_pelanggan" ref="pelanggan_2"/>
+            <field name="tanggal">2026-04-22 12:05:00</field>
+            <field name="total_nominal">67000</field>
+        </record>
+
+        <!-- Tabel Detail Transaksi -->
+        <record id="detail_1" model="pipinos.detail.transaksi">
+            <field name="id_detail">DTL-0001</field>
+            <field name="id_transaksi" ref="transaksi_1"/>
+            <field name="id_menu" ref="menu_1"/>
+            <field name="qty">1</field>
+            <field name="subtotal">28000</field>
+        </record>
+
+        <record id="detail_2" model="pipinos.detail.transaksi">
+            <field name="id_detail">DTL-0002</field>
+            <field name="id_transaksi" ref="transaksi_1"/>
+            <field name="id_menu" ref="menu_2"/>
+            <field name="qty">1</field>
+            <field name="subtotal">25000</field>
+        </record>
+
+        <record id="detail_3" model="pipinos.detail.transaksi">
+            <field name="id_detail">DTL-0003</field>
+            <field name="id_transaksi" ref="transaksi_2"/>
+            <field name="id_menu" ref="menu_1"/>
+            <field name="qty">1</field>
+            <field name="subtotal">28000</field>
+        </record>
+
+        <record id="detail_4" model="pipinos.detail.transaksi">
+            <field name="id_detail">DTL-0004</field>
+            <field name="id_transaksi" ref="transaksi_3"/>
+            <field name="id_menu" ref="menu_3"/>
+            <field name="qty">1</field>
+            <field name="subtotal">42000</field>
+        </record>
+
+        <record id="detail_5" model="pipinos.detail.transaksi">
+            <field name="id_detail">DTL-0005</field>
+            <field name="id_transaksi" ref="transaksi_3"/>
+            <field name="id_menu" ref="menu_2"/>
+            <field name="qty">1</field>
+            <field name="subtotal">25000</field>
         </record>
     </data>
 </odoo>
