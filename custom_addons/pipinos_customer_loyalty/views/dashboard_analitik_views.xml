@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_dashboard_age_gender_graph" model="ir.ui.view">
+        <field name="name">pipinos.demografi.dashboard.age.gender.graph</field>
+        <field name="model">pipinos.demografi</field>
+        <field name="arch" type="xml">
+            <graph string="Avg Usia per Gender" type="bar">
+                <field name="gender" type="row"/>
+                <field name="usia" type="measure" operator="avg"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="action_pipinos_dashboard_age_gender" model="ir.actions.act_window">
+        <field name="name">Avg Usia per Gender</field>
+        <field name="res_model">pipinos.demografi</field>
+        <field name="view_mode">graph,tree</field>
+        <field name="view_id" ref="view_dashboard_age_gender_graph"/>
+    </record>
+
+    <record id="view_dashboard_gender_count_graph" model="ir.ui.view">
+        <field name="name">pipinos.demografi.dashboard.gender.count.graph</field>
+        <field name="model">pipinos.demografi</field>
+        <field name="arch" type="xml">
+            <graph string="Count per Gender" type="bar">
+                <field name="gender" type="row"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="action_pipinos_dashboard_gender_count" model="ir.actions.act_window">
+        <field name="name">Count per Gender</field>
+        <field name="res_model">pipinos.demografi</field>
+        <field name="view_mode">graph,tree</field>
+        <field name="view_id" ref="view_dashboard_gender_count_graph"/>
+    </record>
+
+    <record id="view_dashboard_segment_graph" model="ir.ui.view">
+        <field name="name">pipinos.terdaftar.dashboard.segment.graph</field>
+        <field name="model">pipinos.terdaftar</field>
+        <field name="arch" type="xml">
+            <graph string="Segmen pengunjung" type="bar">
+                <field name="segmen_id" type="row"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="action_pipinos_dashboard_segment" model="ir.actions.act_window">
+        <field name="name">Segmen pengunjung</field>
+        <field name="res_model">pipinos.terdaftar</field>
+        <field name="view_mode">graph,tree</field>
+        <field name="view_id" ref="view_dashboard_segment_graph"/>
+    </record>
+
+    <record id="view_dashboard_visit_graph" model="ir.ui.view">
+        <field name="name">pipinos.transaksi.dashboard.visit.graph</field>
+        <field name="model">pipinos.transaksi</field>
+        <field name="arch" type="xml">
+            <graph string="Frekuensi Kunjungan pengunjung" type="bar">
+                <field name="id_pengunjung" type="row"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="action_pipinos_dashboard_visit_frequency" model="ir.actions.act_window">
+        <field name="name">Frekuensi Kunjungan pengunjung</field>
+        <field name="res_model">pipinos.transaksi</field>
+        <field name="view_mode">graph,tree</field>
+        <field name="view_id" ref="view_dashboard_visit_graph"/>
+    </record>
+
+    <record id="view_dashboard_status_graph" model="ir.ui.view">
+        <field name="name">pipinos.loyalty.member.dashboard.status.graph</field>
+        <field name="model">pipinos.loyalty.member</field>
+        <field name="arch" type="xml">
+            <graph string="Count Status Level" type="bar">
+                <field name="status_level" type="row"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="action_pipinos_dashboard_status_level" model="ir.actions.act_window">
+        <field name="name">Count Status Level</field>
+        <field name="res_model">pipinos.loyalty.member</field>
+        <field name="view_mode">graph,tree</field>
+        <field name="view_id" ref="view_dashboard_status_graph"/>
+    </record>
+
+    <record id="view_dashboard_favorite_menu_pivot" model="ir.ui.view">
+        <field name="name">pipinos.detail.transaksi.dashboard.favorite.menu.pivot</field>
+        <field name="model">pipinos.detail.transaksi</field>
+        <field name="arch" type="xml">
+            <pivot string="Menu Favorit pengunjung">
+                <field name="id_pengunjung" type="row"/>
+                <field name="id_menu" type="col"/>
+                <field name="qty" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="action_pipinos_dashboard_favorite_menu" model="ir.actions.act_window">
+        <field name="name">Menu Favorit pengunjung</field>
+        <field name="res_model">pipinos.detail.transaksi</field>
+        <field name="view_mode">pivot,tree</field>
+        <field name="view_id" ref="view_dashboard_favorite_menu_pivot"/>
+    </record>
+
+    <record id="view_dashboard_menu_count_graph" model="ir.ui.view">
+        <field name="name">pipinos.detail.transaksi.dashboard.menu.count.graph</field>
+        <field name="model">pipinos.detail.transaksi</field>
+        <field name="arch" type="xml">
+            <graph string="Count per Menu" type="bar">
+                <field name="id_menu" type="row"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="action_pipinos_dashboard_menu_count" model="ir.actions.act_window">
+        <field name="name">Count per Menu</field>
+        <field name="res_model">pipinos.detail.transaksi</field>
+        <field name="view_mode">graph,tree</field>
+        <field name="view_id" ref="view_dashboard_menu_count_graph"/>
+    </record>
+
+</odoo>
