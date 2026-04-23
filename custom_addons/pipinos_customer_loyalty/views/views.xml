@@ -6,6 +6,18 @@
         <field name="view_mode">tree,form</field>
     </record>
 
+    <record id="view_pelanggan_tree" model="ir.ui.view">
+        <field name="name">pipinos.pelanggan.tree</field>
+        <field name="model">pipinos.pelanggan</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="nama_lengkap"/>
+                <field name="no_hp"/>
+                <field name="favorite_menu_id"/>
+            </tree>
+        </field>
+    </record>
+
     <record id="view_pelanggan_form" model="ir.ui.view">
         <field name="name">pipinos.pelanggan.form</field>
         <field name="model">pipinos.pelanggan</field>
@@ -87,6 +99,7 @@
             <search>
                 <field name="nama_lengkap" string="Pencarian Nama" filter_domain="['|', '|', ('nama_lengkap', 'ilike', self), ('nama_depan', 'ilike', self), ('nama_belakang', 'ilike', self)]"/>
                 <field name="id_pelanggan" string="Cari ID Pelanggan"/>
+                <field name="no_hp" string="Cari No Telp"/>
             </search>
         </field>
     </record>
@@ -103,7 +116,7 @@
         <field name="arch" type="xml">
             <tree string="Daftar Member Loyalty">
                 <field name="id_pelanggan" string="Nama Pelanggan"/>
-                <field name="id_loyalty" string="ID Loyalty"/>
+                <field name="no_hp"/>
                 <field name="total_poin"/>
                 <field name="status_level" widget="badge" decoration-warning="status_level=='gold'" decoration-info="status_level=='silver'"/>
             </tree>
@@ -121,7 +134,7 @@
                         <h1><field name="id_pelanggan" options="{'no_quick_create': True}"/></h1>
                     </div>
                     <group string="Evaluasi Status &amp; Reward">
-                        <field name="id_loyalty" readonly="1"/>
+                        <field name="no_hp" readonly="1"/>
                         <field name="total_poin"/>
                         <field name="status_level" widget="badge" decoration-warning="status_level=='gold'" decoration-info="status_level=='silver'"/>
                     </group>
@@ -247,10 +260,39 @@
         <field name="view_id" ref="view_dashboard_favorite_menu_pivot"/>
     </record>
 
+    <record id="view_dashboard_menu_count_graph" model="ir.ui.view">
+        <field name="name">pipinos.detail.transaksi.dashboard.menu.count.graph</field>
+        <field name="model">pipinos.detail.transaksi</field>
+        <field name="arch" type="xml">
+            <graph string="Count per Menu" type="bar">
+                <field name="id_menu" type="row"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="action_pipinos_dashboard_menu_count" model="ir.actions.act_window">
+        <field name="name">Count per Menu</field>
+        <field name="res_model">pipinos.detail.transaksi</field>
+        <field name="view_mode">graph,tree</field>
+        <field name="view_id" ref="view_dashboard_menu_count_graph"/>
+    </record>
+
     <record id="action_pipinos_menu" model="ir.actions.act_window">
         <field name="name">Master Data Menu</field>
         <field name="res_model">pipinos.item.menu</field>
         <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="view_menu_tree" model="ir.ui.view">
+        <field name="name">pipinos.item.menu.tree</field>
+        <field name="model">pipinos.item.menu</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="nama_menu"/>
+                <field name="kategori"/>
+                <field name="harga"/>
+            </tree>
+        </field>
     </record>
     <record id="view_menu_form" model="ir.ui.view">
         <field name="name">pipinos.item.menu.form</field>
@@ -274,6 +316,18 @@
         <field name="res_model">pipinos.kampanye</field>
         <field name="view_mode">tree,form</field>
     </record>
+
+    <record id="view_kampanye_tree" model="ir.ui.view">
+        <field name="name">pipinos.kampanye.tree</field>
+        <field name="model">pipinos.kampanye</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="nama_kampanye"/>
+                <field name="tgl_mulai"/>
+                <field name="tgl_selesai"/>
+            </tree>
+        </field>
+    </record>
     <record id="view_kampanye_form" model="ir.ui.view">
         <field name="name">pipinos.kampanye.form</field>
         <field name="model">pipinos.kampanye</field>
@@ -296,6 +350,17 @@
         <field name="res_model">pipinos.segmen</field>
         <field name="view_mode">tree,form</field>
     </record>
+
+    <record id="view_segmen_tree" model="ir.ui.view">
+        <field name="name">pipinos.segmen.tree</field>
+        <field name="model">pipinos.segmen</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="nama_segmen"/>
+                <field name="deskripsi"/>
+            </tree>
+        </field>
+    </record>
     <record id="view_segmen_form" model="ir.ui.view">
         <field name="name">pipinos.segmen.form</field>
         <field name="model">pipinos.segmen</field>
@@ -305,6 +370,7 @@
                     <div class="oe_title"><h1><field name="id_segmen" readonly="1"/></h1></div>
                     <group>
                         <field name="nama_segmen"/>
+                        <field name="deskripsi"/>
                         <field name="kriteria"/>
                     </group>
                 </sheet>
@@ -312,10 +378,59 @@
         </field>
     </record>
 
+    <record id="view_point_conversion_config_tree" model="ir.ui.view">
+        <field name="name">pipinos.point.conversion.config.tree</field>
+        <field name="model">pipinos.point.conversion.config</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="nominal_rupiah"/>
+                <field name="point_value"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_point_conversion_config_form" model="ir.ui.view">
+        <field name="name">pipinos.point.conversion.config.form</field>
+        <field name="model">pipinos.point.conversion.config</field>
+        <field name="arch" type="xml">
+            <form string="Konfigurasi Konversi Poin">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="nominal_rupiah"/>
+                        <field name="point_value"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_pipinos_point_conversion_config" model="ir.actions.act_window">
+        <field name="name">Konfigurasi Konversi Poin</field>
+        <field name="res_model">pipinos.point.conversion.config</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_point_conversion_config_tree"/>
+    </record>
+
     <record id="action_pipinos_transaksi" model="ir.actions.act_window">
         <field name="name">Data Transaksi</field>
         <field name="res_model">pipinos.transaksi</field>
         <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="view_transaksi_tree" model="ir.ui.view">
+        <field name="name">pipinos.transaksi.tree</field>
+        <field name="model">pipinos.transaksi</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="tanggal"/>
+                <field name="id_pelanggan"/>
+                <field name="total_nominal"/>
+            </tree>
+        </field>
     </record>
     <record id="view_transaksi_form" model="ir.ui.view">
         <field name="name">pipinos.transaksi.form</field>
@@ -359,6 +474,7 @@
     <menuitem id="menu_admin_menu" name="Item Menu" parent="menu_admin_master" action="action_pipinos_menu" sequence="2"/>
     <menuitem id="menu_admin_kampanye" name="Kampanye Promo" parent="menu_admin_master" action="action_pipinos_kampanye" sequence="3"/>
     <menuitem id="menu_admin_segmen" name="Segmen Pelanggan" parent="menu_admin_master" action="action_pipinos_segmen" sequence="5"/>
+    <menuitem id="menu_admin_point_conversion_config" name="Konfigurasi Konversi Poin" parent="menu_admin_master" action="action_pipinos_point_conversion_config" sequence="6"/>
     <menuitem id="menu_admin_loyalty_level_config" name="Konfigurasi Status Level" parent="menu_admin_master" action="action_pipinos_loyalty_level_config" sequence="7"/>
     <menuitem id="menu_admin_transaksi" name="Riwayat Transaksi" parent="menu_admin_master" action="action_pipinos_transaksi" sequence="8"/>
     <menuitem id="menu_admin_loyalty" name="Sistem Loyalty" parent="menu_admin_master" action="action_pipinos_loyalty" sequence="9"/>
@@ -370,6 +486,7 @@
     <menuitem id="menu_admin_dashboard_visit_frequency" name="Frekuensi Kunjungan" parent="menu_admin_dashboard_root" action="action_pipinos_dashboard_visit_frequency" sequence="4"/>
     <menuitem id="menu_admin_dashboard_status_level" name="Count Status Level" parent="menu_admin_dashboard_root" action="action_pipinos_dashboard_status_level" sequence="5"/>
     <menuitem id="menu_admin_dashboard_favorite_menu" name="Menu Favorit Pelanggan" parent="menu_admin_dashboard_root" action="action_pipinos_dashboard_favorite_menu" sequence="6"/>
+    <menuitem id="menu_admin_dashboard_menu_count" name="Count per Menu" parent="menu_admin_dashboard_root" action="action_pipinos_dashboard_menu_count" sequence="7"/>
     
     <menuitem id="menu_kasir_root" name="Kasir (Operasional)" parent="menu_pipinos_root" sequence="2"/>
     <menuitem id="menu_kasir_loyalty" name="Sistem Loyalty" parent="menu_kasir_root" action="action_pipinos_loyalty" sequence="3"/>
