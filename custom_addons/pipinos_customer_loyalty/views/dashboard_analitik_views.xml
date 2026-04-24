@@ -90,7 +90,7 @@
         <field name="name">pipinos.detail.transaksi.dashboard.favorite.menu.pivot</field>
         <field name="model">pipinos.detail.transaksi</field>
         <field name="arch" type="xml">
-            <pivot string="Menu Favorit pengunjung">
+            <pivot string="Menu Favorit Pengunjung">
                 <field name="id_pengunjung" type="row"/>
                 <field name="id_menu" type="col"/>
                 <field name="qty" type="measure"/>
@@ -99,7 +99,7 @@
     </record>
 
     <record id="action_pipinos_dashboard_favorite_menu" model="ir.actions.act_window">
-        <field name="name">Menu Favorit pengunjung</field>
+        <field name="name">Menu Favorit Pengunjung</field>
         <field name="res_model">pipinos.detail.transaksi</field>
         <field name="view_mode">pivot,tree</field>
         <field name="view_id" ref="view_dashboard_favorite_menu_pivot"/>
